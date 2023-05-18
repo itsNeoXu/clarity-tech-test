@@ -26,5 +26,5 @@ PUT /metrics/{id}
   -H 'Content-Type: application/json'
   -d '{"id":1,"system":"system_5","name":"system_5_metric_4"}'
 
-GET /metricsummary (placeholder)
-* curl "localhost:8080/metrics/1"
+GET /metricsummary
+* curl "localhost:8080/metricsummary?system=system_1&name=system_1_metric_1&from=1684342263&to=1684342265"

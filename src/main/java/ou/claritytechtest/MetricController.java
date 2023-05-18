@@ -19,7 +19,6 @@ public class MetricController {
                                 @RequestParam(required = false) String name,
                                 @RequestParam(required = false) Integer from,
                                 @RequestParam(required = false) Integer to) {
-
         return metricRepository.findBySystemAndOptionalParams(system, name, from, to);
     }
 
