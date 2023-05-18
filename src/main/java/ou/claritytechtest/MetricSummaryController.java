@@ -8,10 +8,10 @@ import java.util.List;
 @RequestMapping("/metricsummary")
 public class MetricSummaryController {
 
-    private MetricRepository metricRepository;
+    private MetricSummaryService metricSummaryService;
 
-    public MetricSummaryController(MetricRepository metricRepository) {
-        this.metricRepository = metricRepository;
+    public MetricSummaryController(MetricSummaryService metricSummaryService) {
+        this.metricSummaryService = metricSummaryService;
     }
 
     @GetMapping
@@ -19,8 +19,6 @@ public class MetricSummaryController {
                                           @RequestParam(required = false) String name,
                                           @RequestParam(required = false) Integer from,
                                           @RequestParam(required = false) Integer to) {
-        List<Metric> metrics = metricRepository.findBySystemAndOptionalParams(system, name, from, to);
-        int total = metrics.stream().mapToInt(Metric::getValue).sum();
-        return new MetricSummary(system, name, from, to, total);
+        return metricSummaryService.getMetricSummary(system, name, from, to);
     }
 }
