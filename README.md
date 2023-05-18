@@ -22,9 +22,9 @@ POST /metrics
   -d '{"system":"system_5","name":"system_5_metric_4"}'
 
 PUT /metrics/{id}
-* curl -X PUT "localhost:8080/metrics"
+*  curl -X PUT "localhost:8080/metrics/1"
   -H 'Content-Type: application/json'
-  -d '{"system":"system_5","name":"system_5_metric_4"}'
+  -d '{"id":1,"system":"system_5","name":"system_5_metric_4"}'
 
 GET /metricsummary (placeholder)
 * curl "localhost:8080/metrics/1"

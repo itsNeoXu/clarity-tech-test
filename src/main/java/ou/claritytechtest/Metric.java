@@ -16,7 +16,7 @@ public class Metric {
     @Column(name = "metric_value")
     private Integer value;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -28,11 +28,11 @@ public class Metric {
         return name;
     }
 
-    public int getDate() {
+    public Integer getDate() {
         return date;
     }
 
-    public int getValue() {
+    public Integer getValue() {
         return value;
     }
 }
