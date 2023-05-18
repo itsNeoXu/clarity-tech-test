@@ -1,13 +1,30 @@
-# Read Me First
-The following was discovered as part of building this project:
+# Clarity Software Group Technical Skills Test
 
-* The original package name 'ou.clarity-tech-skills-test' is invalid and this project uses 'ou.claritytechtest' instead.
+This application allows for the storage, retrieval and updating of metric data
 
-# Getting Started
+## Running the application
 
-### Reference Documentation
-For further reference, please consider the following sections:
+* Clone the project from the GitHub URL: https://github.com/itsNeoXu/clarity-tech-test
+* Navigate to the cloned directory
+* Run ./mvnw spring-boot:run (Unix) or mvnw.cmd spring-boot:run (Windows)
 
-* [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
-* [Spring Boot Maven Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/3.0.6/maven-plugin/reference/html/)
-* [Create an OCI image](https://docs.spring.io/spring-boot/docs/3.0.6/maven-plugin/reference/html/#build-image)# clarity-tech-test
+## APIs and example usage
+
+GET /metrics
+* curl "localhost:8080/metrics?system=system_1&name=system_1_metric_1&from=1684342263&to=1684342265"
+
+GET /metrics/{id}
+* curl "localhost:8080/metrics/1"
+
+POST /metrics
+* curl -X POST "localhost:8080/metrics"
+  -H 'Content-Type: application/json'
+  -d '{"system":"system_5","name":"system_5_metric_4"}'
+
+PUT /metrics/{id}
+* curl -X PUT "localhost:8080/metrics"
+  -H 'Content-Type: application/json'
+  -d '{"system":"system_5","name":"system_5_metric_4"}'
+
+GET /metricsummary (placeholder)
+* curl "localhost:8080/metrics/1"

@@ -1,25 +1,20 @@
 package ou.claritytechtest;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"system", "name", "date"}))
 public class Metric {
 
     @Id
-    @GeneratedValue
-    private int id;
-    @Column(unique = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private String system;
-    @Column(unique = true)
     private String name;
-    @Column(unique = true)
-    private int date;
+    private Integer date;
     @Column(name = "metric_value")
-    private int value;
+    private Integer value;
 
     public int getId() {
         return id;
