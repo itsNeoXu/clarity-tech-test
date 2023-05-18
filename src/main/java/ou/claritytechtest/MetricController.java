@@ -1,7 +1,9 @@
 package ou.claritytechtest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -29,15 +31,41 @@ public class MetricController {
 
     @PostMapping
     public Metric create(@RequestBody Metric metric) {
+        if (StringUtils.isBlank(metric.getSystem())) {
+            throw new RuntimeException("system cannot be blank");
+        }
+        if (StringUtils.isBlank(metric.getName())) {
+            throw new RuntimeException("name cannot be blank");
+        }
+        if (metric.getDate() == null) {
+            Date date = new Date();
+            long unixTime = date.getTime() / 1000L;
+            metric.setDate((int) unixTime);
+        }
+        if (metric.getValue() == null) {
+            metric.setValue(1);
+        }
         return metricRepository.save(metric);
     }
 
     @PutMapping("/{id}")
     public Metric update(@RequestBody Metric metric, @PathVariable int id) {
         if (metric.getId() != id) {
-            throw new RuntimeException();
+            throw new RuntimeException("Metric id " + metric.getId() + " does not match provided path id " + id);
         }
-        metricRepository.findById(id).orElseThrow();
+        if (StringUtils.isBlank(metric.getSystem())) {
+            throw new RuntimeException("system cannot be blank");
+        }
+        if (StringUtils.isBlank(metric.getName())) {
+            throw new RuntimeException("name cannot be blank");
+        }
+        if (metric.getDate() == null) {
+            throw new RuntimeException("date cannot be blank");
+        }
+        Metric foundMetric = metricRepository.findById(id).orElseThrow();
+        if (metric.getValue() == null) {
+            metric.setValue(foundMetric.getValue() + 1);
+        }
         return metricRepository.save(metric);
     }
 }
